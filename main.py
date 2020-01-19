@@ -24,6 +24,8 @@ def donate():
             Donation(donor=donor, value=request.form['value']).save()
             return redirect(url_for('all'))
 
+        except Donor.DoesNotExist:
+            return render_template('donate.jinja2', error="Donor not in database. Check spelling and capitalization.")
             
     else:
         return render_template('donate.jinja2')
