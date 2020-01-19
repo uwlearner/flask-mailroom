@@ -15,6 +15,15 @@ def home():
 def all():
     donations = Donation.select()
     return render_template('donations.jinja2', donations=donations)
+
+@app.route('/donate/', methods=['GET', 'POST'])
+def donate():
+    if request.method == 'POST':
+        try:
+            donor = Donor.get(name=request.form['donor'])
+            Donation(donor=donor, value=request.form['value']).save()
+            return redirect(url_for('all'))
+
             
     else:
         return render_template('donate.jinja2')
