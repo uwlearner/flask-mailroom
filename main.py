@@ -15,6 +15,9 @@ def home():
 def all():
     donations = Donation.select()
     return render_template('donations.jinja2', donations=donations)
+            
+    else:
+        return render_template('donate.jinja2')
     
 
 if __name__ == "__main__":
